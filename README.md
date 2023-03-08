@@ -1,8 +1,19 @@
+# MELFORMS
+
+The main idea is to provide a simple renderer component that receives a json configuration
+and outputs a somewhat complex form. The objective is for the json configuration to be as simple and
+understandable as possible.
+
+This project was created to solve a use case I face daily. This will be basically my
+"ideal solution" and I expect at some point to be able to implement this into my work.
+I decided to keep it as a personal project because I wanted it to be a generic solution
+that later will be integrated.
+
+More documentation on the future when the concept evolves a little bit more.
+
 ## Usage
 
-Those templates dependencies are maintained via [pnpm](https://pnpm.io) via `pnpm up -Lri`.
-
-This is the reason you see a `pnpm-lock.yaml`. That being said, any package manager will work. This file can be safely be removed once you clone a template.
+Project created using Vite using solidjs Typescript Vite template. To install just run:
 
 ```bash
 $ npm install # or pnpm install or yarn install
