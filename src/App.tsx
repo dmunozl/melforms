@@ -4,21 +4,25 @@ import {MelForm} from "./types";
 
 const testForm:MelForm = {
   steps: [{
+    id: 'step1',
     blocks: [{
-      id: 'id',
+      id: 'id1',
       name: 'name',
       options: {
-        label: 'Text field'
+        values: ['option1', 'option2'],
+        labels: ['Option 1', 'Option 2'],
+        exclusive: true
+      },
+      type: 'ToggleButton'
+    },{
+      id: 'id2',
+      name: 'name',
+      options: {
+        label: 'Text field',
+        fullWidth: true
       },
       type: 'TextField'
-    },{
-      id: 'id',
-      name: 'name',
-      options: {
-        label: 'Text field'
-      },
-      type: 'SingleSelect'
-    }]
+    },]
   }]
 }
 const App: Component = () => {

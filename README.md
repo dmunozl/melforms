@@ -9,17 +9,15 @@ This project was created to solve a use case I face daily. This will be basicall
 I decided to keep it as a personal project because I wanted it to be a generic solution
 that later will be integrated.
 
-More documentation on the future when the concept evolves a little bit more.
+More documentation on the future when the concept evolves a bit more.
 
 ## Usage
 
-Project created using Vite using solidjs Typescript Vite template. To install just run:
+Project created using solidjs Typescript Vite template. To install just run:
 
 ```bash
-$ npm install # or pnpm install or yarn install
+$ npm install
 ```
-
-### Learn more on the [Solid Website](https://solidjs.com) and come chat with us on our [Discord](https://discord.com/invite/solidjs)
 
 ## Available Scripts
 
