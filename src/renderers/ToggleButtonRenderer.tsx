@@ -1,6 +1,6 @@
 import {Component, For} from "solid-js";
 import {ToggleButtonGroup, ToggleButton} from "@suid/material";
-import {MelBlock} from "../types";
+import {MelBlock, RendererProps} from "../types";
 import {useForm} from "../formContext";
 
 type ToggleButtonOptionsProps = {
@@ -9,13 +9,16 @@ type ToggleButtonOptionsProps = {
     exclusive: boolean
 
 }
-export const ToggleButtonRenderer: Component<MelBlock & { stepId: string }> = (props) => {
-    const {values, labels} = props.options as ToggleButtonOptionsProps
-    // @ts-ignore
-    const [formState, {updateValue}] = useForm()
+export const ToggleButtonRenderer: Component<RendererProps> = (props) => {
+    const formData = useForm()
+    if(!formData) return null
 
-    return <ToggleButtonGroup value={formState()[props.stepId]?.[props.id]} onChange={(e, v) => {
-        updateValue(props.stepId, props.id, v)
+    const {formState, updateValue} = formData
+    const {block, stepConfig} = props
+    const {values, labels} = block.options as ToggleButtonOptionsProps
+
+    return <ToggleButtonGroup value={formState()[stepConfig.id]?.[block.id]} onChange={(e, v) => {
+        updateValue(stepConfig.id, block.id, v)
     }} exclusive>
         <For each={values}>
             {(value, i) => {
