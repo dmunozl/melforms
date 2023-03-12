@@ -1,6 +1,6 @@
 import {Component} from "solid-js";
 import {TextField} from "@suid/material";
-import {MelBlock, RendererProps} from "../types";
+import {RendererProps} from "../types";
 import {useForm} from "../formContext";
 
 type TextFieldOptionsProps = {
@@ -13,9 +13,9 @@ export const TextFieldRenderer: Component<RendererProps> = (props) => {
     const {formState, updateValue} = formData
     const {block, stepConfig} = props
     const options = block.options as TextFieldOptionsProps
+    const value = () => formState()[stepConfig.id]?.[block.id] || ''
+    const handleChange = (_e:Event, v:string) => updateValue(stepConfig.id, block.id, v)
 
 
-    return <TextField {...options} onChange={(_e, v) => {
-        updateValue(stepConfig.id, block.id, v)
-    }} value={formState()[stepConfig.id]?.[block.id] || ''}/>
+    return <TextField {...options} onChange={handleChange} value={value()}/>
 }

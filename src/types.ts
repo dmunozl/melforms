@@ -6,11 +6,12 @@ export type MelForm = {
 
 export type MelStepConfig = {
     id: string
+    layout: MelLayout
     navigation?: MelNavigation[]
 }
 
 export type MelStep = MelStepConfig & {
-    blocks: MelBlock[]
+    blocks: Record<string, MelBlock>
 }
 
 export type MelBlock = {
@@ -19,12 +20,7 @@ export type MelBlock = {
     type: string
     class?: string
     options?: Record<string, string | string[] | boolean>
-    trigger?: 'navigate'
-}
-
-export type RendererProps = {
-    stepConfig: MelStepConfig
-    block: MelBlock
+    triggers?: MelTrigger
 }
 
 export type MelNavigation = {
@@ -33,6 +29,21 @@ export type MelNavigation = {
     checkType?: 'exact match' | 'contains'
     checkKey?: [string, string]
     checkValue?: MelValue
+}
+
+export type MelTrigger = 'validate' | 'navigateForward' | 'navigateBackward' | 'restart'
+
+// Types for Layout management
+export type MelLayout = MelColumn[]
+export type MelColumn = {
+    width: string
+    blockIds: string[]
+}
+
+// Types for use on Components
+export type RendererProps = {
+    stepConfig: MelStepConfig
+    block: MelBlock
 }
 
 // Types for form data handling

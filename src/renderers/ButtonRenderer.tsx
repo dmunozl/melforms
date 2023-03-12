@@ -13,9 +13,8 @@ export const ButtonRenderer: Component<RendererProps> = (props) => {
     const {performNavigation} = formData
     const {block} = props
     const {label, ...options} = block.options as ButtonOptionsProps
-
     const handleClick = () => {
-        if (block.trigger === 'navigate' && props.stepConfig.navigation) {
+        if (block.triggers === 'navigateForward' && props.stepConfig.navigation) {
             performNavigation(props.stepConfig.navigation)
         }
     }
