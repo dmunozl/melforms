@@ -1,3 +1,5 @@
+// noinspection SpellCheckingInspection
+
 import type {Component} from "solid-js"
 import {MelForm} from "./types"
 import {MelFormComponent} from "./MelFormComponent"

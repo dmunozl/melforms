@@ -1,7 +1,6 @@
 import {Component} from "solid-js"
 import {RendererProps} from "../types"
 
-
 export const DefaultRenderer:Component<RendererProps>= (props) => {
     const {block} = props
     const jsonBlock = JSON.stringify(block, null, 2)

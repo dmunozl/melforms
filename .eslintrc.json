@@ -9,6 +9,12 @@
         "plugin:solid/typescript"
     ],
     "overrides": [
+        {
+            "files": ["src/**/*.tsx"],
+            "rules": {
+                "solid/reactivity": ["off"]
+            }
+        }
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {

@@ -1,15 +1,13 @@
 import {Component} from "solid-js"
 import {TextField} from "@suid/material"
 import {RendererProps} from "../types"
-import {useForm} from "../formContext"
+import {FormModifierData, useForm} from "../formContext"
 
 type TextFieldOptionsProps = {
     required: boolean
 }
 export const TextFieldRenderer: Component<RendererProps> = (props) => {
-    const formData = useForm()
-    if(!formData) return null
-
+    const formData = useForm() as FormModifierData
     const {formState, formErrors, showErrors, updateError, updateValue} = formData
     const {block, stepConfig} = props
     const options = block.options as TextFieldOptionsProps

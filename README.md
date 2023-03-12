@@ -13,7 +13,7 @@ More documentation on the future when the concept evolves a bit more.
 
 ## Usage
 
-Project created using solidjs Typescript Vite template. To install just run:
+Project created using SolidJS Typescript Vite template. To install just run:
 
 ```bash
 $ npm install

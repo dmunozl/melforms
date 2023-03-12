@@ -10,7 +10,7 @@ type FormProviderProps = {
     children?: JSX.Element
 }
 
-type FormModifierData = {
+export type FormModifierData = {
     formState: Accessor<MelFormState>
     currentStepId: Accessor<string>
     formErrors: Accessor<MelFormErrors>

@@ -1,15 +1,13 @@
 import {Component} from "solid-js"
 import {Button} from "@suid/material"
 import {RendererProps} from "../types"
-import {useForm} from "../formContext"
+import {FormModifierData, useForm} from "../formContext"
 
 type ButtonOptionsProps = {
     label: string
 }
 export const ButtonRenderer: Component<RendererProps> = (props) => {
-    const formData = useForm()
-    if(!formData) return null
-
+    const formData = useForm() as FormModifierData
     const {formErrors, setShowErrors, performNavigation} = formData
     const {block, stepConfig} = props
     const {label, ...options} = block.options as ButtonOptionsProps

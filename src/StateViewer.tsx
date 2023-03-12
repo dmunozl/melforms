@@ -1,13 +1,11 @@
 import {Component, createSignal} from "solid-js"
-import {useForm} from "./formContext"
+import {FormModifierData, useForm} from "./formContext"
 import KeyboardArrowLeftIcon from "@suid/icons-material/KeyboardArrowLeft"
 import KeyboardArrowRightIcon from "@suid/icons-material/KeyboardArrowRight"
 import {Button} from "@suid/material"
 
 export const StateViewer: Component = () => {
-    const formData = useForm()
-    if (!formData) return null
-
+    const formData = useForm() as FormModifierData
     const {formState, currentStepId, formErrors} = formData
     const [expanded, setExpanded] = createSignal<boolean>(false)
 

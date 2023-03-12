@@ -1,18 +1,17 @@
 import {Component, For} from "solid-js"
 import {MelForm, RendererProps} from "./types"
-import {useForm} from "./formContext"
+import {FormModifierData, useForm} from "./formContext"
 import {renderersDict} from "./renderers"
 
 export const MelRenderer:Component<{form:MelForm}> = (props) => {
-    const formData = useForm()
-    if(!formData) return null
-
+    const formData = useForm() as FormModifierData
     const {currentStepId} = formData
     const header = props.form.header
     const steps = props.form.steps
     const blocks = () => steps[currentStepId()].blocks
     const columns = () => steps[currentStepId()].layout
     const stepConfig = () => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const {blocks, ...rest} = steps[currentStepId()]
         return rest
     }
