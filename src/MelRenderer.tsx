@@ -24,7 +24,7 @@ export const MelRenderer:Component<{form:MelForm}> = (props) => {
                         {(blockId) => {
                             const block = blocks()[blockId]
                             const RenderComponent = getComponent(block.type)
-                            return <div class={`flex pl-4 pr-4 pt-4 w-full ${block.class}`}>
+                            return <div class={`flex pl-4 pr-4 pt-4 ${block.class || 'w-full'}`}>
                                 <RenderComponent block={block} stepConfig={stepConfig()}/>
                             </div>}
                         }

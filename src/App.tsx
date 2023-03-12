@@ -45,6 +45,7 @@ const testForm: MelForm = {
                     type: 'TextField',
                     class: 'w-1/2',
                     options: {
+                        required: true,
                         label: 'Text field 1',
                         fullWidth: true
                     }
@@ -63,8 +64,8 @@ const testForm: MelForm = {
                     id: 'block3',
                     name: 'Block 3',
                     type: 'Button',
-                    class: 'justify-end',
-                    triggers: 'navigateForward',
+                    class: 'w-full justify-end',
+                    triggers: ['validate', 'navigateForward'],
                     options: {
                         variant: 'contained',
                         label: 'Next'

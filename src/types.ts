@@ -20,7 +20,7 @@ export type MelBlock = {
     type: string
     class?: string
     options?: Record<string, string | string[] | boolean>
-    triggers?: MelTrigger
+    triggers?: MelTrigger[]
 }
 
 export type MelNavigation = {
@@ -50,3 +50,6 @@ export type RendererProps = {
 export type MelFormState = Record<string, MelStepState>
 export type MelStepState = Record<string, MelValue>
 export type MelValue = string | boolean | Record<string, string>
+
+export type MelFormErrors = Record<string, MelStepErrors>
+export type MelStepErrors = Record<string, boolean>
