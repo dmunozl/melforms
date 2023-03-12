@@ -1,8 +1,7 @@
-import {Component, For} from "solid-js";
-import {MelForm, RendererProps} from "./types";
-import {useForm} from "./formContext";
-import {renderersDict} from "./renderers";
-import {StateViewer} from "./StateViewer";
+import {Component, For} from "solid-js"
+import {MelForm, RendererProps} from "./types"
+import {useForm} from "./formContext"
+import {renderersDict} from "./renderers"
 
 export const MelRenderer:Component<{form:MelForm}> = (props) => {
     const formData = useForm()
@@ -20,20 +19,20 @@ export const MelRenderer:Component<{form:MelForm}> = (props) => {
 
     return <>
         { header && <div class="flex bg-gray-700 justify-between h-14">
-            <div></div>
-            <img class={`p-3 ${header.class || ''}`} src={`${header.logo}`}/>
-            <div></div>
+            <div />
+            <img class={`p-3 ${header.class || ""}`} src={`${header.logo}`} alt="logo"/>
+            <div />
         </div>
         }
         <div class="flex flex-wrap w-2/3 mt-14 m-auto">
             <For each={columns()}>
-                {(column, i) => {
+                {(column) => {
                     return <div class={`flex flex-wrap ${column.width}`}>
                         <For each={column.blockIds}>
                             {(blockId) => {
                                 const block = blocks()[blockId]
                                 const RenderComponent = getComponent(block.type)
-                                return <div class={`flex pl-4 pr-4 pt-4 ${block.class || 'w-full'}`}>
+                                return <div class={`flex pl-4 pr-4 pt-4 ${block.class || "w-full"}`}>
                                     <RenderComponent block={block} stepConfig={stepConfig()}/>
                                 </div>}
                             }
@@ -43,9 +42,8 @@ export const MelRenderer:Component<{form:MelForm}> = (props) => {
             </For>
         </div>
     </>
-
 }
 
 const getComponent = (componentType: string):Component<RendererProps> => {
-    return  renderersDict[componentType] || renderersDict['Default']
+    return  renderersDict[componentType] || renderersDict["Default"]
 }

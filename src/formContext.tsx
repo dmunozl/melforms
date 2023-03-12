@@ -1,5 +1,7 @@
-import {createSignal, createContext, useContext, Component, JSX, Accessor, Setter} from "solid-js";
-import {MelFormErrors, MelFormState, MelNavigation, MelValue} from "./types";
+// noinspection JSUnusedGlobalSymbols
+
+import {createSignal, createContext, useContext, Component, JSX, Accessor, Setter} from "solid-js"
+import {MelFormErrors, MelFormState, MelNavigation, MelValue} from "./types"
 
 
 type FormProviderProps = {
@@ -19,7 +21,7 @@ type FormModifierData = {
     performNavigation: (navigationArray: MelNavigation[]) => void
 }
 
-const FormContext = createContext<FormModifierData>();
+const FormContext = createContext<FormModifierData>()
 export const FormProvider:Component<FormProviderProps> = (props) => {
     const [formState, setFormState] = createSignal<MelFormState>(props.formState)
     const [formErrors, setFormErrors] = createSignal<MelFormErrors>({})
@@ -51,21 +53,21 @@ export const FormProvider:Component<FormProviderProps> = (props) => {
         performNavigation: (navigationArray: MelNavigation[]) => {
             for(const nav of navigationArray){
                 const stepId = nav.stepId
-                if(nav.type === 'just go'){
+                if(nav.type === "just go"){
                     setCurrentStepId(stepId)
                     break
                 } else {
-                    console.log('invalid navigation type')
+                    console.log("invalid navigation type")
                 }
             }
         }
-    };
+    }
 
     return (
         <FormContext.Provider value={formModifier}>
             {props.children}
         </FormContext.Provider>
-    );
+    )
 }
 
-export function useForm() { return useContext(FormContext); }
+export function useForm() { return useContext(FormContext) }

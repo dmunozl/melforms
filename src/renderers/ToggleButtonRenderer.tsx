@@ -1,7 +1,7 @@
-import {Component, For} from "solid-js";
-import {ToggleButtonGroup, ToggleButton} from "@suid/material";
-import {RendererProps} from "../types";
-import {useForm} from "../formContext";
+import {Component, For} from "solid-js"
+import {ToggleButtonGroup, ToggleButton} from "@suid/material"
+import {RendererProps} from "../types"
+import {useForm} from "../formContext"
 
 type ToggleButtonOptionsProps = {
     values: string[]

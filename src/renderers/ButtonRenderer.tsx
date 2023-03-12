@@ -1,7 +1,7 @@
-import {Component} from "solid-js";
-import {Button} from "@suid/material";
-import {RendererProps} from "../types";
-import {useForm} from "../formContext";
+import {Component} from "solid-js"
+import {Button} from "@suid/material"
+import {RendererProps} from "../types"
+import {useForm} from "../formContext"
 
 type ButtonOptionsProps = {
     label: string
@@ -15,12 +15,12 @@ export const ButtonRenderer: Component<RendererProps> = (props) => {
     const {label, ...options} = block.options as ButtonOptionsProps
     const handleClick = () => {
         if (!block.triggers) {
-            console.log('No triggers set for this Button')
+            console.log("No triggers set for this Button")
             return
         }
 
         for (const trigger of block.triggers) {
-            if (trigger === 'validate') {
+            if (trigger === "validate") {
                 let hasErrors = false
                 const stepErrors = formErrors()[stepConfig.id]
                 for (const blockId in stepErrors) {
@@ -34,7 +34,7 @@ export const ButtonRenderer: Component<RendererProps> = (props) => {
                     break
                 }
             }
-            if (trigger === 'navigateForward' && props.stepConfig.navigation) {
+            if (trigger === "navigateForward" && props.stepConfig.navigation) {
                 performNavigation(props.stepConfig.navigation)
             }
         }

@@ -31,13 +31,13 @@ export type MelBlock = {
 
 export type MelNavigation = {
     stepId: string
-    type: 'just go' | 'check value'
-    checkType?: 'exact match' | 'contains'
+    type: "just go" | "check value"
+    checkType?: "exact match" | "contains"
     checkKey?: [string, string]
     checkValue?: MelValue
 }
 
-export type MelTrigger = 'validate' | 'navigateForward' | 'navigateBackward' | 'submit' | 'restart'
+export type MelTrigger = "validate" | "navigateForward" | "navigateBackward" | "submit" | "restart"
 
 // Types for Layout management
 export type MelLayout = MelColumn[]
