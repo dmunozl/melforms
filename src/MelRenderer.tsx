@@ -1,11 +1,12 @@
 import {Component, For} from "solid-js"
 import {MelForm, RendererProps} from "./types"
 import {FormModifierData, useForm} from "./formContext"
+import KeyboardArrowLeftIcon from "@suid/icons-material/KeyboardArrowLeft"
 import {renderersDict} from "./renderers"
 
 export const MelRenderer:Component<{form:MelForm}> = (props) => {
     const formData = useForm() as FormModifierData
-    const {currentStepId} = formData
+    const {currentStepId, triggerFunctions} = formData
     const header = props.form.header
     const steps = props.form.steps
     const blocks = () => steps[currentStepId()].blocks
@@ -17,11 +18,12 @@ export const MelRenderer:Component<{form:MelForm}> = (props) => {
     }
 
     return <>
-        { header && <div class="flex bg-gray-700 justify-between h-14">
-            <div />
-            <img class={`p-3 ${header.class || ""}`} src={`${header.logo}`} alt="logo"/>
-            <div />
-        </div>
+        { header &&
+            <div class="flex bg-gray-700 justify-between items-center h-14">
+                <div class="text-white cursor-pointer p-4" onClick={triggerFunctions.navigateBackward}><KeyboardArrowLeftIcon/></div>
+                <img class={`p-3 max-h-full ${header.class || ""}`} src={`${header.logo}`} alt="logo"/>
+                <div />
+            </div>
         }
         <div class="flex flex-wrap w-2/3 mt-14 m-auto">
             <For each={columns()}>

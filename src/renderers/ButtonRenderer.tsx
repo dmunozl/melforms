@@ -8,7 +8,7 @@ type ButtonOptionsProps = {
 }
 export const ButtonRenderer: Component<RendererProps> = (props) => {
     const formData = useForm() as FormModifierData
-    const {formErrors, setShowErrors, performNavigation} = formData
+    const {triggerFunctions} = formData
     const {block, stepConfig} = props
     const {label, ...options} = block.options as ButtonOptionsProps
     const handleClick = () => {
@@ -19,21 +19,12 @@ export const ButtonRenderer: Component<RendererProps> = (props) => {
 
         for (const trigger of block.triggers) {
             if (trigger === "validate") {
-                let hasErrors = false
-                const stepErrors = formErrors()[stepConfig.id]
-                for (const blockId in stepErrors) {
-                    if(stepErrors[blockId]){
-                        hasErrors = true
-                        break
-                    }
-                }
-                setShowErrors(hasErrors)
-                if (hasErrors) {
+                if(triggerFunctions.validate(stepConfig.id)){
                     break
                 }
             }
             if (trigger === "navigateForward" && props.stepConfig.navigation) {
-                performNavigation(props.stepConfig.navigation)
+                triggerFunctions.navigateForward(props.stepConfig.navigation)
             }
         }
 
