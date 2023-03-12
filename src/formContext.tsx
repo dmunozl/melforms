@@ -1,5 +1,5 @@
 import {createSignal, createContext, useContext, Component, JSX, Accessor, Setter} from "solid-js";
-import {MelForm, MelFormErrors, MelFormState, MelNavigation, MelValue} from "./types";
+import {MelFormErrors, MelFormState, MelNavigation, MelValue} from "./types";
 
 
 type FormProviderProps = {

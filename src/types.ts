@@ -2,6 +2,12 @@
 export type MelForm = {
     firstStepId: string
     steps: Record<string, MelStep>
+    header?: MelHeader
+}
+
+export type MelHeader = {
+    logo: string,
+    class?: string
 }
 
 export type MelStepConfig = {
@@ -31,7 +37,7 @@ export type MelNavigation = {
     checkValue?: MelValue
 }
 
-export type MelTrigger = 'validate' | 'navigateForward' | 'navigateBackward' | 'restart'
+export type MelTrigger = 'validate' | 'navigateForward' | 'navigateBackward' | 'submit' | 'restart'
 
 // Types for Layout management
 export type MelLayout = MelColumn[]

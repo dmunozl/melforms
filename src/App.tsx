@@ -4,6 +4,9 @@ import {MelFormComponent} from "./MelFormComponent";
 
 const testForm: MelForm = {
     firstStepId: 'step1',
+    header: {
+        logo: '/src/assets/logo.png'
+    },
     steps: {
         'step1': {
             id: 'step1',
@@ -43,7 +46,7 @@ const testForm: MelForm = {
                     id: 'textfield1',
                     name: 'Text field 1',
                     type: 'TextField',
-                    class: 'w-1/2',
+                    class: 'w-full',
                     options: {
                         required: true,
                         label: 'Text field 1',
@@ -54,7 +57,7 @@ const testForm: MelForm = {
                     id: 'textfield2',
                     name: 'Text field 2',
                     type: 'TextField',
-                    class: 'w-1/2',
+                    class: 'w-full',
                     options: {
                         label: 'Text field 2',
                         fullWidth: true
