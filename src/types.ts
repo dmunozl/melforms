@@ -1,4 +1,6 @@
 // Types for form JSON definition
+import {FormModifier} from "./formContext"
+
 export type MelForm = {
     firstStepId: string
     steps: Record<string, MelStep>
@@ -59,3 +61,7 @@ export type MelValue = string | boolean | Record<string, string>
 
 export type MelFormErrors = Record<string, MelStepErrors>
 export type MelStepErrors = Record<string, boolean>
+
+// Types for triggers
+export type TriggerFunction = (formModifier:FormModifier) => boolean
+export type TriggerDict = Record<string, TriggerFunction>

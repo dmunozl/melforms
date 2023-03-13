@@ -1,31 +1,31 @@
 // noinspection JSUnusedGlobalSymbols
 
 import {createSignal, createContext, useContext, Component, JSX, Accessor, Setter} from "solid-js"
-import {MelFormErrors, MelFormState, MelNavigation, MelValue} from "./types"
+import {MelForm, MelFormErrors, MelFormState, MelValue} from "./types"
 
 
 type FormProviderProps = {
+    form: MelForm
     formState: MelFormState
     currentStepId: string
     children?: JSX.Element
 }
 
-export type FormModifierData = {
+export type FormModifier = {
+    form: MelForm
     formState: Accessor<MelFormState>
     currentStepId: Accessor<string>
+    setCurrentStepId: Setter<string>
     formErrors: Accessor<MelFormErrors>
     showErrors: Accessor<boolean>
+    setShowErrors:Setter<boolean>
     updateValue: (stepId:string, blockId: string, value: MelValue) => void
     updateError: (stepId:string, blockId: string, hasErrors: boolean) => void
     history:Accessor<string[]>
-    triggerFunctions: {
-        validate: (stepId:string) => boolean
-        navigateForward: (navigationArray: MelNavigation[]) => void
-        navigateBackward: () => void
-    }
+    setHistory: Setter<string[]>
 }
 
-const FormContext = createContext<FormModifierData>()
+const FormContext = createContext<FormModifier>()
 export const FormProvider:Component<FormProviderProps> = (props) => {
     const [formState, setFormState] = createSignal<MelFormState>(props.formState)
     const [formErrors, setFormErrors] = createSignal<MelFormErrors>({})
@@ -34,11 +34,15 @@ export const FormProvider:Component<FormProviderProps> = (props) => {
     const [history, setHistory] = createSignal<string[]>([props.currentStepId])
 
     const formModifier = {
+        form: props.form,
         formState: formState,
         currentStepId: currentStepId,
+        setCurrentStepId: setCurrentStepId,
         formErrors: formErrors,
         showErrors: showErrors,
+        setShowErrors: setShowErrors,
         history: history,
+        setHistory: setHistory,
         updateValue: (stepId: string, blockId:string, value:MelValue) => {
             const newFormState = {...formState()}
             if (!newFormState[stepId]) {
@@ -54,45 +58,7 @@ export const FormProvider:Component<FormProviderProps> = (props) => {
             }
             newFormErrors[stepId][blockId] = hasErrors
             setFormErrors(newFormErrors)
-        },
-        triggerFunctions: {
-            validate: (stepId: string) => {
-                let hasErrors = false
-                const stepErrors = formErrors()[stepId]
-                for (const blockId in stepErrors) {
-                    if(stepErrors[blockId]){
-                        hasErrors = true
-                        break
-                    }
-                }
-                setShowErrors(hasErrors)
-                return hasErrors
-            },
-            navigateForward: (navigationArray: MelNavigation[]) => {
-                for(const nav of navigationArray){
-                    const stepId = nav.stepId
-                    const newHistory = [...history(), stepId]
-                    if(nav.type === "just go"){
-                        setCurrentStepId(stepId)
-                        setHistory(newHistory)
-                        break
-                    } else {
-                        console.log("invalid navigation type")
-                    }
-                }
-            },
-            navigateBackward: () => {
-                if(history().length === 1) {
-                    return
-                }
-                const newHistory = [...history()]
-                newHistory.pop()
-                const newStepId = newHistory[newHistory.length - 1]
-                setCurrentStepId(newStepId)
-                setHistory(newHistory)
-            }
-        },
-
+        }
     }
 
     return (

@@ -1,7 +1,7 @@
 import {Component, For} from "solid-js"
 import {ToggleButtonGroup, ToggleButton} from "@suid/material"
 import {RendererProps} from "../types"
-import {FormModifierData, useForm} from "../formContext"
+import {FormModifier, useForm} from "../formContext"
 
 type ToggleButtonOptionsProps = {
     values: string[]
@@ -10,8 +10,8 @@ type ToggleButtonOptionsProps = {
 
 }
 export const ToggleButtonRenderer: Component<RendererProps> = (props) => {
-    const formData = useForm() as FormModifierData
-    const {formState, updateValue} = formData
+    const formModifier = useForm() as FormModifier
+    const {formState, updateValue} = formModifier
     const {block, stepConfig} = props
     const {values, labels} = block.options as ToggleButtonOptionsProps
     const value = () => formState()[stepConfig.id]?.[block.id]
@@ -21,8 +21,7 @@ export const ToggleButtonRenderer: Component<RendererProps> = (props) => {
         <For each={values}>
             {(value, i) => {
                 return <ToggleButton value={value}>{labels ? labels[i()] : value}</ToggleButton>
-            }
-            }
+            }}
         </For>
     </ToggleButtonGroup>
 }

@@ -5,8 +5,9 @@ import {MelRenderer} from "./MelRenderer"
 import {StateViewer} from "./StateViewer"
 
 export const MelFormComponent:Component<{form:MelForm}> = (props) => {
-    return <FormProvider formState={{}} currentStepId={props.form.firstStepId}>
-        <MelRenderer form={props.form}/>
+
+    return <FormProvider form={props.form} formState={{}} currentStepId={props.form.firstStepId}>
+        <MelRenderer/>
         <StateViewer/>
     </FormProvider>
 }

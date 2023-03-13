@@ -1,14 +1,15 @@
 import {Component, For} from "solid-js"
-import {MelForm, RendererProps} from "./types"
-import {FormModifierData, useForm} from "./formContext"
+import {RendererProps} from "./types"
+import {FormModifier, useForm} from "./formContext"
 import KeyboardArrowLeftIcon from "@suid/icons-material/KeyboardArrowLeft"
 import {renderersDict} from "./renderers"
+import {navigateBackward} from "./triggers/navigateBackward"
 
-export const MelRenderer:Component<{form:MelForm}> = (props) => {
-    const formData = useForm() as FormModifierData
-    const {currentStepId, triggerFunctions} = formData
-    const header = props.form.header
-    const steps = props.form.steps
+export const MelRenderer:Component = () => {
+    const formModifier = useForm() as FormModifier
+    const {form, currentStepId} = formModifier
+    const header = form.header
+    const steps = form.steps
     const blocks = () => steps[currentStepId()].blocks
     const columns = () => steps[currentStepId()].layout
     const stepConfig = () => {
@@ -20,7 +21,9 @@ export const MelRenderer:Component<{form:MelForm}> = (props) => {
     return <>
         { header &&
             <div class="flex bg-gray-700 justify-between items-center h-14">
-                <div class="text-white cursor-pointer p-4" onClick={triggerFunctions.navigateBackward}><KeyboardArrowLeftIcon/></div>
+                <div class="text-white cursor-pointer p-4" onClick={() => navigateBackward(formModifier)}>
+                    <KeyboardArrowLeftIcon/>
+                </div>
                 <img class={`p-3 max-h-full ${header.class || ""}`} src={`${header.logo}`} alt="logo"/>
                 <div />
             </div>
