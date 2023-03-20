@@ -29,17 +29,31 @@ export type MelBlock = {
     class?: string
     options?: Record<string, string | string[] | boolean>
     triggers?: MelTrigger[]
+    display?: MelDisplay
 }
 
 export type MelNavigation = {
-    stepId: string
-    type: "just go" | "check value"
-    checkType?: "exact match" | "contains"
-    checkKey?: [string, string]
-    checkValue?: MelValue
+    targetStepId: string
+    type: "just go" | "check operation"
+    reference?: MelReference
+    operation?: MelOperation
+    value?: MelValue
 }
 
-export type MelTrigger = "validate" | "navigateForward" | "navigateBackward" | "submit" | "restart"
+export type MelDisplay = {
+    reference: MelReference
+    operation: MelOperation
+    value?: MelValue
+}
+
+export type MelTrigger = "validate" | "navigateForward" | "navigateBackward" | "submit" | "restart" | string
+
+export type MelOperation = "exactMatch" | "contains" | "isValid"
+
+export type MelReference = {
+    stepId: string
+    blockId:string
+}
 
 // Types for Layout management
 export type MelLayout = MelColumn[]
@@ -65,3 +79,7 @@ export type MelStepErrors = Record<string, boolean>
 // Types for triggers
 export type TriggerFunction = (formModifier:FormModifier) => boolean
 export type TriggerDict = Record<string, TriggerFunction>
+
+// Types for operations
+export type OperationFunction = (value1:never, value2:never) => boolean
+export type OperationDict = Record<string, OperationFunction>

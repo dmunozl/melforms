@@ -5,7 +5,7 @@ export const navigateForward = (formModifier:FormModifier) => {
     const navigationArray = form.steps[currentStepId()].navigation || []
 
     for(const nav of navigationArray){
-        const stepId = nav.stepId
+        const stepId = nav.targetStepId
         const newHistory = [...history(), stepId]
         if(nav.type === "just go"){
             setCurrentStepId(stepId)

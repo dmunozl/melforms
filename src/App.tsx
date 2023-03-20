@@ -14,7 +14,7 @@ const testForm: MelForm = {
             id: "step1",
             navigation: [{
                 type: "just go",
-                stepId: "step2"
+                targetStepId: "step2"
             }],
             blocks: {
                 "title": {
@@ -53,6 +53,14 @@ const testForm: MelForm = {
                         required: true,
                         label: "Text field 1",
                         fullWidth: true
+                    },
+                    display: {
+                        reference: {
+                            stepId: "step1",
+                            blockId: "block1"
+                        },
+                        operation: "exactMatch",
+                        value: "option1"
                     }
                 },
                 "textfield2": {
@@ -61,6 +69,7 @@ const testForm: MelForm = {
                     type: "TextField",
                     class: "w-full",
                     options: {
+                        required: true,
                         label: "Text field 2",
                         fullWidth: true
                     }
