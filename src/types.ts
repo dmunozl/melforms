@@ -1,6 +1,6 @@
-// Types for form JSON definition
 import {FormModifier} from "./formContext"
 
+/* TYPES FOR FORM JSON DEFINITION */
 export type MelForm = {
     firstStepId: string
     steps: Record<string, MelStep>
@@ -55,20 +55,26 @@ export type MelReference = {
     blockId:string
 }
 
-// Types for Layout management
+/* TYPES FOR LAYOUT MANAGEMENT */
 export type MelLayout = MelColumn[]
 export type MelColumn = {
     width: string
     blockIds: string[]
 }
 
-// Types for use on Components
+/* TYPES FOR USING ON RENDERERS */
+
+// Used by the Common renderer
 export type RendererProps = {
     stepConfig: MelStepConfig
     block: MelBlock
 }
+// Used by renderers wrapped by Common
+export type ExtendedRendererProps = RendererProps & {
+    formModifier: FormModifier
+}
 
-// Types for form data handling
+/* TYPES FOR DATA HANDLING */
 export type MelFormState = Record<string, MelStepState>
 export type MelStepState = Record<string, MelValue>
 export type MelValue = string | boolean | Record<string, string>
@@ -76,10 +82,10 @@ export type MelValue = string | boolean | Record<string, string>
 export type MelFormErrors = Record<string, MelStepErrors>
 export type MelStepErrors = Record<string, boolean>
 
-// Types for triggers
+/* TYPES FOR TRIGGERS (Will probably move to triggers folder) */
 export type TriggerFunction = (formModifier:FormModifier) => boolean
 export type TriggerDict = Record<string, TriggerFunction>
 
-// Types for operations
+/* TYPES FOR OPERATION (Will probably move to operations folder) */
 export type OperationFunction = (value1:never, value2:never) => boolean
 export type OperationDict = Record<string, OperationFunction>

@@ -6,7 +6,7 @@ import {Button} from "@suid/material"
 
 export const StateViewer: Component = () => {
     const formModifier = useForm() as FormModifier
-    const {formState, currentStepId, formErrors, history} = formModifier
+    const {formState, currentStepId, formErrors, formDisplay, history} = formModifier
     const [expanded, setExpanded] = createSignal<boolean>(false)
 
     return <div class="fixed right-0 top-14 bg-gray-900 text-amber-50 h-full overflow-y-auto">
@@ -20,6 +20,8 @@ export const StateViewer: Component = () => {
                 Step Data: <pre>{JSON.stringify(formState()[currentStepId()], null, 2)}</pre>
                 <br/>
                 StepErrors: <pre>{JSON.stringify(formErrors()[currentStepId()], null, 2)}</pre>
+                <br/>
+                StepDisplay: <pre>{JSON.stringify(formDisplay()[currentStepId()], null, 2)}</pre>
                 <br/>
                 History: <pre>{JSON.stringify(history(), null, 2)}</pre>
             </div>}

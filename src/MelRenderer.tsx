@@ -36,10 +36,9 @@ export const MelRenderer:Component = () => {
                             {(blockId) => {
                                 const block = blocks()[blockId]
                                 const RenderComponent = getComponent(block.type)
-                                return <div class={`flex pl-4 pr-4 pt-4 ${block.class || "w-full"}`}>
-                                    <RenderComponent block={block} stepConfig={stepConfig()}/>
-                                </div>}
-                            }
+
+                                return <RenderComponent block={block} stepConfig={stepConfig()}/>
+                            }}
                         </For>
                     </div>
                 }}
