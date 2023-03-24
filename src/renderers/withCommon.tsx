@@ -7,7 +7,7 @@ export const withCommon = (Component: Component<ExtendedRendererProps>) => {
 
     const WrappedRenderer: Component<RendererProps> = (props) => {
         const formModifier = useForm() as FormModifier
-        const {formState, formDisplay, updateDisplay} = formModifier
+        const {formDisplay, updateDisplay} = formModifier
         const {block, stepConfig} = props
         const display = block.display
 
@@ -19,9 +19,7 @@ export const withCommon = (Component: Component<ExtendedRendererProps>) => {
             }
 
             const operationFunction = operationDict[display.operation]
-            const referencedValue = formState()[display.reference.stepId]?.[display.reference.blockId]
-            const operationValue = display.value
-            const shouldDisplay = operationFunction(referencedValue as never, operationValue as never)
+            const shouldDisplay = operationFunction(display.reference, formModifier, display.value)
 
             shouldDisplay !== formDisplay()[stepConfig.id]?.[block.id] && updateDisplay(stepConfig.id, block.id, shouldDisplay)
 

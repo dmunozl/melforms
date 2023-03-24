@@ -72,6 +72,13 @@ const testForm: MelForm = {
                         required: true,
                         label: "Text field 2",
                         fullWidth: true
+                    },
+                    display: {
+                        reference: {
+                            stepId: "step1",
+                            blockId: "textfield1"
+                        },
+                        operation: "isValid"
                     }
                 },
                 "block3": {

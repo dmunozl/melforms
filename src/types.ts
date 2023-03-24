@@ -87,5 +87,5 @@ export type TriggerFunction = (formModifier:FormModifier) => boolean
 export type TriggerDict = Record<string, TriggerFunction>
 
 /* TYPES FOR OPERATION (Will probably move to operations folder) */
-export type OperationFunction = (value1:never, value2:never) => boolean
+export type OperationFunction = (reference:MelReference, formModifier:FormModifier, expectedValue?:MelValue) => boolean
 export type OperationDict = Record<string, OperationFunction>
