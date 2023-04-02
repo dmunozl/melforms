@@ -55,12 +55,12 @@ const testForm: MelForm = {
                         fullWidth: true
                     },
                     display: {
+                        function: "exactMatch",
                         reference: {
                             stepId: "step1",
                             blockId: "block1"
                         },
-                        operation: "exactMatch",
-                        value: "option1"
+                        expectedValue: "option1"
                     }
                 },
                 "textfield2": {
@@ -74,11 +74,11 @@ const testForm: MelForm = {
                         fullWidth: true
                     },
                     display: {
+                        function: "isValid",
                         reference: {
                             stepId: "step1",
                             blockId: "textfield1"
-                        },
-                        operation: "isValid"
+                        }
                     }
                 },
                 "block3": {
@@ -86,7 +86,11 @@ const testForm: MelForm = {
                     name: "Block 3",
                     type: "Button",
                     class: "w-full justify-end",
-                    triggers: ["validate", "navigateForward"],
+                    triggers: [{
+                        function: "validate"
+                    }, {
+                        function: "navigateForward"
+                    }],
                     options: {
                         variant: "contained",
                         label: "Next"

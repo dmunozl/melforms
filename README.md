@@ -23,7 +23,7 @@ $ npm install
 
 In the project directory, you can run:
 
-### `npm dev` or `npm start`
+### `npm run dev` or `npm start`
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -38,6 +38,11 @@ It correctly bundles Solid in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
-## Deployment
+## Documentation
 
-You can deploy the `dist` folder to any static host provider (netlify, surge, now, etc.)
+Pseudo documentation can be found on the following drive link: <br>
+https://docs.google.com/document/d/1o82WoL4cmDkzydvw96o0VbXDrEGfwJWTKY9sqqit3GI/edit?usp=sharing
+
+As the project grows larger I will be creating a proper documentation site.
+
+

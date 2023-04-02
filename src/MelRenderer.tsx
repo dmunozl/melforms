@@ -1,5 +1,5 @@
 import {Component, For} from "solid-js"
-import {RendererProps} from "./types"
+import {RendererProps} from "./renderers/types"
 import {FormModifier, useForm} from "./formContext"
 import KeyboardArrowLeftIcon from "@suid/icons-material/KeyboardArrowLeft"
 import {renderersDict} from "./renderers"

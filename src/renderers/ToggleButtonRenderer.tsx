@@ -1,6 +1,6 @@
 import {Component, For} from "solid-js"
 import {ToggleButtonGroup, ToggleButton} from "@suid/material"
-import {ExtendedRendererProps} from "../types"
+import {ExtendedRendererProps} from "./types"
 
 type ToggleButtonOptionsProps = {
     values: string[]

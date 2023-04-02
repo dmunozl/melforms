@@ -1,9 +1,10 @@
-import {TriggerDict} from "../types"
+import {TriggerDict} from "./types"
 import {FormModifier} from "../formContext"
 
 import {validate} from "./validate"
 import {navigateForward} from "./navigateForward"
 import {navigateBackward} from "./navigateBackward"
+import {MelTrigger} from "../types"
 
 export const triggerDict:TriggerDict = {
     validate: validate,
@@ -11,12 +12,12 @@ export const triggerDict:TriggerDict = {
     navigateBackward: navigateBackward
 }
 
-export const applyTriggers = (triggerList:string[], formModifier:FormModifier) => {
+export const applyTriggers = (triggerList:MelTrigger[], formModifier:FormModifier) => {
     for(const trigger of triggerList){
-        if(!triggerDict[trigger]){
+        if(!triggerDict[trigger.function]){
             continue
         }
-        const success = triggerDict[trigger](formModifier)
+        const success = triggerDict[trigger.function](formModifier)
         if(!success) break
     }
 }

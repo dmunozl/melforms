@@ -6,7 +6,15 @@ export const navigateForward = (formModifier:FormModifier) => {
 
     for(const nav of navigationArray){
         const stepId = nav.targetStepId
-        const newHistory = [...history(), stepId]
+        const historyArray = history()
+        let newHistory = [...historyArray, stepId]
+
+        // If step was already visited, we assume we are jumping back!
+        if(historyArray.includes(stepId)){
+            const index = historyArray.findIndex((value) => value === stepId)
+            newHistory = historyArray.slice(0, index+1)
+        }
+
         if(nav.type === "just go"){
             setCurrentStepId(stepId)
             setHistory(newHistory)

@@ -1,5 +1,5 @@
 import {Component, Show} from "solid-js"
-import {ExtendedRendererProps, RendererProps} from "../types"
+import {ExtendedRendererProps, RendererProps} from "./types"
 import {FormModifier, useForm} from "../formContext"
 import {operationDict} from "../operations"
 
@@ -18,8 +18,8 @@ export const withCommon = (Component: Component<ExtendedRendererProps>) => {
                 return true
             }
 
-            const operationFunction = operationDict[display.operation]
-            const shouldDisplay = operationFunction(display.reference, formModifier, display.value)
+            const operationFunction = operationDict[display.function]
+            const shouldDisplay = operationFunction(display.reference, formModifier, display.expectedValue)
 
             shouldDisplay !== formDisplay()[stepConfig.id]?.[block.id] && updateDisplay(stepConfig.id, block.id, shouldDisplay)
 

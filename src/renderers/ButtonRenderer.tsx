@@ -1,6 +1,6 @@
 import {Component} from "solid-js"
 import {Button} from "@suid/material"
-import {ExtendedRendererProps} from "../types"
+import {ExtendedRendererProps} from "./types"
 import {applyTriggers} from "../triggers"
 
 type ButtonOptionsProps = {

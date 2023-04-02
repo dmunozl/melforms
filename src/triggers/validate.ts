@@ -1,5 +1,5 @@
 import {FormModifier} from "../formContext"
-import {TriggerFunction} from "../types"
+import {TriggerFunction} from "./types"
 
 export const validate:TriggerFunction = (formModifier:FormModifier) => {
     const {currentStepId, formErrors, formDisplay, setShowErrors} = formModifier

@@ -1,5 +1,5 @@
 import {Component} from "solid-js"
-import {ExtendedRendererProps} from "../types"
+import {ExtendedRendererProps} from "./types"
 
 export const DefaultRenderer:Component<ExtendedRendererProps>= (props) => {
     const {block} = props

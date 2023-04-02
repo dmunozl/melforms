@@ -1,7 +1,7 @@
 // noinspection JSUnusedGlobalSymbols
 
 import {createSignal, createContext, useContext, Component, JSX, Accessor, Setter} from "solid-js"
-import {MelForm, MelFormErrors, MelFormState, MelValue} from "./types"
+import {MelForm, MelFormBoolState, MelFormState, MelValue} from "./types"
 
 
 type FormProviderProps = {
@@ -14,10 +14,10 @@ type FormProviderProps = {
 export type FormModifier = {
     form: MelForm
     formState: Accessor<MelFormState>
-    formDisplay: Accessor<MelFormErrors>
+    formDisplay: Accessor<MelFormBoolState>
     currentStepId: Accessor<string>
     setCurrentStepId: Setter<string>
-    formErrors: Accessor<MelFormErrors>
+    formErrors: Accessor<MelFormBoolState>
     showErrors: Accessor<boolean>
     setShowErrors:Setter<boolean>
     updateValue: (stepId:string, blockId: string, value: MelValue) => void
@@ -30,8 +30,8 @@ export type FormModifier = {
 const FormContext = createContext<FormModifier>()
 export const FormProvider:Component<FormProviderProps> = (props) => {
     const [formState, setFormState] = createSignal<MelFormState>(props.formState)
-    const [formErrors, setFormErrors] = createSignal<MelFormErrors>({})
-    const [formDisplay, setFormDisplay] = createSignal<MelFormErrors>({})
+    const [formErrors, setFormErrors] = createSignal<MelFormBoolState>({})
+    const [formDisplay, setFormDisplay] = createSignal<MelFormBoolState>({})
     const [showErrors, setShowErrors] = createSignal<boolean>(false)
     const [currentStepId, setCurrentStepId] = createSignal<string>(props.currentStepId)
     const [history, setHistory] = createSignal<string[]>([props.currentStepId])

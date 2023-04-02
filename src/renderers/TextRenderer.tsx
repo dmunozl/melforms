@@ -1,6 +1,6 @@
 import {Component} from "solid-js"
 import {Typography} from "@suid/material"
-import {ExtendedRendererProps} from "../types"
+import {ExtendedRendererProps} from "./types"
 
 type TextOptionsProps = {
     text: string

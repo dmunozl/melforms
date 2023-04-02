@@ -1,6 +1,6 @@
 import {Component} from "solid-js"
 import {TextField} from "@suid/material"
-import {ExtendedRendererProps} from "../types"
+import {ExtendedRendererProps} from "./types"
 
 type TextFieldOptionsProps = {
     required: boolean
@@ -22,7 +22,5 @@ export const TextFieldRenderer: Component<ExtendedRendererProps> = (props) => {
         return false
     }
 
-    // Set initial error state
     return <TextField {...options} onChange={handleChange} value={value()} error={errorState()}/>
-
 }
