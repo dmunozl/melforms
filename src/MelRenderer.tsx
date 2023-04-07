@@ -4,8 +4,14 @@ import {FormModifier, useForm} from "./formContext"
 import KeyboardArrowLeftIcon from "@suid/icons-material/KeyboardArrowLeft"
 import {renderersDict} from "./renderers"
 import {navigateBackward} from "./triggers/navigateBackward"
+import {TriggerDict} from "./triggers/types"
+import {registerTriggers} from "./triggers"
 
-export const MelRenderer:Component = () => {
+type MelRendererProps = {
+    customTriggers?: TriggerDict
+}
+
+export const MelRenderer:Component<MelRendererProps> = (props) => {
     const formModifier = useForm() as FormModifier
     const {form, currentStepId} = formModifier
     const header = form.header
@@ -17,6 +23,8 @@ export const MelRenderer:Component = () => {
         const {blocks, ...rest} = steps[currentStepId()]
         return rest
     }
+
+    props.customTriggers && registerTriggers(props.customTriggers)
 
     return <>
         { header &&

@@ -7,6 +7,9 @@ export const exactMatch = (reference:MelReference, formModifier: FormModifier, e
     const value = formState()[reference.stepId]?.[reference.blockId] as MelValue
     const matchType = typeof value
 
+    if(matchType === "undefined")
+        return false
+
     if (Array.isArray(value) || simpleTypes.includes(matchType)) {
         return exactMatchCompValues(value as MelCompValue, expectedValue as MelCompValue)
     }

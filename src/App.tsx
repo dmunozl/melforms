@@ -3,6 +3,8 @@
 import type {Component} from "solid-js"
 import {MelForm} from "./types"
 import {MelFormComponent} from "./MelFormComponent"
+import {TriggerDict, TriggerFunction} from "./triggers/types"
+import {FormModifier} from "./formContext"
 
 const testForm: MelForm = {
     firstStepId: "step1",
@@ -87,6 +89,9 @@ const testForm: MelForm = {
                     type: "Button",
                     class: "w-full justify-end",
                     triggers: [{
+                        function: "logState"
+                    },
+                    {
                         function: "validate"
                     }, {
                         function: "navigateForward"
@@ -145,8 +150,16 @@ const testForm: MelForm = {
         }
     }
 }
+const logState:TriggerFunction = (formModifier:FormModifier) => {
+    console.log(formModifier.formState())
+    return true
+}
+
 const App: Component = () => {
-    return <MelFormComponent form={testForm}/>
+    const customTriggers: TriggerDict = {
+        logState: logState
+    }
+    return <MelFormComponent form={testForm} customTriggers={customTriggers}/>
 }
 
 export default App

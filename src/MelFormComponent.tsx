@@ -3,11 +3,16 @@ import {MelForm} from "./types"
 import {FormProvider} from "./formContext"
 import {MelRenderer} from "./MelRenderer"
 import {StateViewer} from "./StateViewer"
+import {TriggerDict} from "./triggers/types"
 
-export const MelFormComponent:Component<{form:MelForm}> = (props) => {
+type MelFormComponentProps = {
+    form: MelForm
+    customTriggers?: TriggerDict
+}
+export const MelFormComponent:Component<MelFormComponentProps> = (props) => {
 
     return <FormProvider form={props.form} formState={{}} currentStepId={props.form.firstStepId}>
-        <MelRenderer/>
+        <MelRenderer customTriggers={props.customTriggers}/>
         <StateViewer/>
     </FormProvider>
 }

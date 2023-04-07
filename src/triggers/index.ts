@@ -12,6 +12,14 @@ export const triggerDict:TriggerDict = {
     navigateBackward: navigateBackward
 }
 
+export const registerTriggers = (customTriggers:TriggerDict) =>{
+    const triggerNames = Object.keys(customTriggers)
+
+    for(const triggerName of triggerNames) {
+        triggerDict[triggerName] = customTriggers[triggerName]
+    }
+}
+
 export const applyTriggers = (triggerList:MelTrigger[], formModifier:FormModifier) => {
     for(const trigger of triggerList){
         if(!triggerDict[trigger.function]){
