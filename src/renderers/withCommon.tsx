@@ -4,7 +4,6 @@ import {FormModifier, useForm} from "../formContext"
 import {operationDict} from "../operations"
 
 export const withCommon = (Component: Component<ExtendedRendererProps>) => {
-
     const WrappedRenderer: Component<RendererProps> = (props) => {
         const formModifier = useForm() as FormModifier
         const {formDisplay, updateDisplay} = formModifier

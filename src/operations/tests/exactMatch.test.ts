@@ -2,7 +2,7 @@
 
 import { expect, describe, it } from "vitest"
 import {exactMatch} from "../exactMatch"
-import {formModifier as fm} from "../../fixtures"
+import {formModifier as fm} from "../../tests/fixtures"
 
 describe("exactMatch operation", () => {
     it("Should work with Strings", () => {
@@ -37,7 +37,7 @@ describe("exactMatch operation", () => {
     })
 
     it("Should work with Objects", () => {
-        const reference = {stepId:"mockStep", blockId:"arrayBlock"}
+        const reference = {stepId:"mockStep", blockId:"objectBlock"}
         const correctValue = {
             key1: "value1",
             key2: true,

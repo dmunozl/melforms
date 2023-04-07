@@ -1,10 +1,8 @@
-// noinspection DuplicatedCode
-
 import { expect, describe, it } from "vitest"
 import {isValid} from "../isValid"
-import {formModifier as fm} from "../../fixtures"
+import {formModifier as fm} from "../../tests/fixtures"
 
-describe("exactMatch operation", () => {
+describe("isValid operation", () => {
     // As this operator works on formError and formDisplay states
     // The output type of the block itself is irrelevant
     it("Should work", () => {

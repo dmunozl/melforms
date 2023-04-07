@@ -61,8 +61,9 @@ export type MelColumn = {
 /* SUPPORTED VALUES */
 export type MelSimpleValue = string | boolean
 export type MelArrayValue = MelSimpleValue[]
-export type MelObjectValue = Record<string, MelSimpleValue | MelArrayValue>
-export type MelValue = MelSimpleValue | MelArrayValue | MelObjectValue
+export type MelCompValue = MelSimpleValue | MelArrayValue
+export type MelObjectValue = Record<string, MelCompValue>
+export type MelValue = MelCompValue | MelObjectValue
 
 /* TYPES FOR DATA AND STATE HANDLING */
 export type MelFormState = Record<string, MelStepState>
