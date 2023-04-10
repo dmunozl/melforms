@@ -4,7 +4,7 @@ import {FormModifier} from "../formContext"
 export const exactMatch = (reference:MelReference, formModifier: FormModifier, expectedValue?:MelValue) => {
     const {formState} = formModifier
     const simpleTypes = ["string", "boolean"]
-    const value = formState()[reference.stepId]?.[reference.blockId] as MelValue
+    const value = formState()[reference.stepId]?.[reference.blockId]
     const matchType = typeof value
 
     if(matchType === "undefined")
@@ -35,7 +35,7 @@ export const exactMatch = (reference:MelReference, formModifier: FormModifier, e
         return true
     }
 
-    console.warn(`No match implementation for type ${matchType}. Match always false.`)
+    console.warn(`No match implementation for type ${matchType}. Defaulting to false.`)
     return false
 }
 

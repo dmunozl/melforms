@@ -56,14 +56,26 @@ export const textFieldForm: MelForm = {
                     options: {
                         required: true,
                         label: "Text field",
-                        fullWidth: true
+                        fullWidth: true,
+                        "data-testid": "textfield"
                     }
                 },
+                "button": {
+                    id: "button",
+                    name: "Button",
+                    type: "Button",
+                    triggers: [{
+                        function: "spyBlock"
+                    }],
+                    options: {
+                        label: "Spy Block"
+                    }
+                }
             },
             layout: [{
                 width:"w-full",
                 blockIds: [
-                    "textfield"
+                    "textfield", "button"
                 ]
             }]
         }
