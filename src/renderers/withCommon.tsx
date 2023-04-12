@@ -1,12 +1,10 @@
 import {Component, Show} from "solid-js"
-import {ExtendedRendererProps, RendererProps} from "./types"
-import {FormModifier, useForm} from "../formContext"
+import {RendererProps} from "./types"
 import {operationDict} from "../operations"
+import {formDisplay, updateDisplay} from "../melStore"
 
-export const withCommon = (Component: Component<ExtendedRendererProps>) => {
+export const withCommon = (Component: Component<RendererProps>) => {
     const WrappedRenderer: Component<RendererProps> = (props) => {
-        const formModifier = useForm() as FormModifier
-        const {formDisplay, updateDisplay} = formModifier
         const {block, stepConfig} = props
         const display = block.display
 
@@ -18,7 +16,7 @@ export const withCommon = (Component: Component<ExtendedRendererProps>) => {
             }
 
             const operationFunction = operationDict[display.function]
-            const shouldDisplay = operationFunction(display.reference, formModifier, display.expectedValue)
+            const shouldDisplay = operationFunction(display.reference, display.expectedValue)
 
             shouldDisplay !== formDisplay()[stepConfig.id]?.[block.id] && updateDisplay(stepConfig.id, block.id, shouldDisplay)
 
@@ -27,7 +25,7 @@ export const withCommon = (Component: Component<ExtendedRendererProps>) => {
 
         return <Show when={displayState()} keyed>
             <div class={`flex pl-4 pr-4 pt-4 ${block.class || "w-full"}`}>
-                <Component {...props} formModifier={formModifier}/>
+                <Component {...props}/>
             </div>
         </Show>
     }

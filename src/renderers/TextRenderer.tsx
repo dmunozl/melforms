@@ -1,11 +1,11 @@
 import {Component} from "solid-js"
 import {Typography} from "@suid/material"
-import {ExtendedRendererProps} from "./types"
+import {RendererProps} from "./types"
 
 type TextOptionsProps = {
     text: string
 }
-export const TextRenderer: Component<ExtendedRendererProps> = (props) => {
+export const TextRenderer: Component<RendererProps> = (props) => {
     const {block} = props
     const {text, ...options} = block.options as TextOptionsProps
 

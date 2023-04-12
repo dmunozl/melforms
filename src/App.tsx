@@ -2,9 +2,10 @@
 
 import type {Component} from "solid-js"
 import {MelForm} from "./types"
-import {MelFormComponent} from "./MelFormComponent"
 import {TriggerDict, TriggerFunction} from "./triggers/types"
-import {FormModifier} from "./formContext"
+import {formState} from "./melStore"
+import {MelRenderer} from "./MelRenderer"
+import {StateViewer} from "./StateViewer"
 
 const testForm: MelForm = {
     firstStepId: "step1",
@@ -150,8 +151,8 @@ const testForm: MelForm = {
         }
     }
 }
-const logState:TriggerFunction = (formModifier:FormModifier) => {
-    console.log(formModifier.formState())
+const logState:TriggerFunction = () => {
+    console.log(formState())
     return true
 }
 
@@ -159,7 +160,10 @@ const App: Component = () => {
     const customTriggers: TriggerDict = {
         logState: logState
     }
-    return <MelFormComponent form={testForm} customTriggers={customTriggers}/>
+    return <>
+        <MelRenderer customTriggers={customTriggers} form={testForm}/>
+        <StateViewer/>
+    </>
 }
 
 export default App

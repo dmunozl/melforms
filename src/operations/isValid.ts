@@ -1,8 +1,7 @@
 import {MelReference} from "../types"
-import {FormModifier} from "../formContext"
+import {formDisplay, formErrors} from "../melStore"
 
-export const isValid = (reference:MelReference, formModifier: FormModifier) => {
-    const {formErrors, formDisplay} = formModifier
+export const isValid = (reference:MelReference) => {
     const hasErrors = formErrors()[reference.stepId]?.[reference.blockId]
     const displayState = formDisplay()[reference.stepId]?.[reference.blockId]
 

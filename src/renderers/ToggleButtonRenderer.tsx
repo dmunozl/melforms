@@ -1,15 +1,15 @@
 import {Component, For} from "solid-js"
 import {ToggleButtonGroup, ToggleButton} from "@suid/material"
-import {ExtendedRendererProps} from "./types"
+import {RendererProps} from "./types"
+import {formState, updateValue} from "../melStore"
 
 type ToggleButtonOptionsProps = {
     values: string[]
     labels?: string[]
     exclusive: boolean
 }
-export const ToggleButtonRenderer: Component<ExtendedRendererProps> = (props) => {
-    const {block, stepConfig, formModifier} = props
-    const {formState, updateValue} = formModifier
+export const ToggleButtonRenderer: Component<RendererProps> = (props) => {
+    const {block, stepConfig} = props
 
     const {values, labels} = block.options as ToggleButtonOptionsProps
     const value = () => formState()[stepConfig.id]?.[block.id]

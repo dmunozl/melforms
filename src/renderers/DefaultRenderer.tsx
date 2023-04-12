@@ -1,7 +1,7 @@
 import {Component} from "solid-js"
-import {ExtendedRendererProps} from "./types"
+import {RendererProps} from "./types"
 
-export const DefaultRenderer:Component<ExtendedRendererProps>= (props) => {
+export const DefaultRenderer:Component<RendererProps>= (props) => {
     const {block} = props
     const jsonBlock = JSON.stringify(block, null, 2)
 

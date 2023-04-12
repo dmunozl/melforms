@@ -1,9 +1,7 @@
-import {FormModifier} from "../formContext"
 import {TriggerFunction} from "./types"
+import {currentStepId, formErrors, formDisplay, setShowErrors} from "../melStore"
 
-export const validate:TriggerFunction = (formModifier:FormModifier) => {
-    const {currentStepId, formErrors, formDisplay, setShowErrors} = formModifier
-
+export const validate:TriggerFunction = () => {
     let hasErrors = false
 
     const stepErrors = formErrors()[currentStepId()]

@@ -1,8 +1,7 @@
 import {MelArrayValue, MelCompValue, MelObjectValue, MelReference, MelValue} from "../types"
-import {FormModifier} from "../formContext"
+import {formState} from "../melStore"
 
-export const exactMatch = (reference:MelReference, formModifier: FormModifier, expectedValue?:MelValue) => {
-    const {formState} = formModifier
+export const exactMatch = (reference:MelReference, expectedValue?:MelValue) => {
     const simpleTypes = ["string", "boolean"]
     const value = formState()[reference.stepId]?.[reference.blockId]
     const matchType = typeof value

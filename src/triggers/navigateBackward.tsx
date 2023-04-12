@@ -1,8 +1,6 @@
-import {FormModifier} from "../formContext"
+import {history, setCurrentStepId, setHistory} from "../melStore"
 
-export const navigateBackward = (formModifier:FormModifier) => {
-    const {history, setHistory, setCurrentStepId} = formModifier
-
+export const navigateBackward = () => {
     if(history().length === 1) {
         return true
     }

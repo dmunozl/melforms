@@ -1,10 +1,13 @@
+// noinspection SpellCheckingInspection
+
 import {describe, expect, it, vi} from "vitest"
 import {fireEvent, render} from "@solidjs/testing-library"
 
 import {textFieldForm} from "./fixtures"
-import {MelFormComponent} from "../MelFormComponent"
 import {TriggerFunction} from "../triggers/types"
 import {MelValue} from "../types"
+import {formDisplay, formErrors, formState} from "../melStore"
+import {MelRenderer} from "../MelRenderer"
 
 type SingleBlockData = {
     value: MelValue | MelValue[],
@@ -16,8 +19,7 @@ const getBlockDataFunction = (
     blockId: string,
     callback: (data: SingleBlockData) => SingleBlockData
 ) => {
-    const returnFunction: TriggerFunction = (formModifier) => {
-        const {formState, formErrors, formDisplay} = formModifier
+    const returnFunction: TriggerFunction = () => {
         const blockData: SingleBlockData = {
             value: formState()[stepId]?.[blockId],
             hasError: formErrors()[stepId]?.[blockId],
@@ -37,7 +39,7 @@ describe("Renderer Tests", () => {
             spyBlock: getDataTrigger
         }
         const {getByText, getByTestId} = await render(() =>
-            <MelFormComponent form={textFieldForm} customTriggers={customTriggers}/>
+            <MelRenderer form={textFieldForm} customTriggers={customTriggers}/>
         )
         const button = getByText("Spy Block")
         const textField = getByTestId("textfield").children[1].children[0]

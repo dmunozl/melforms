@@ -1,8 +1,7 @@
-import {FormModifier} from "../formContext"
+import {currentStepId, form, history, setCurrentStepId, setHistory} from "../melStore"
 
-export const navigateForward = (formModifier:FormModifier) => {
-    const {form, currentStepId, setCurrentStepId, history, setHistory} = formModifier
-    const navigationArray = form.steps[currentStepId()].navigation || []
+export const navigateForward = () => {
+    const navigationArray = form()?.steps[currentStepId()].navigation || []
 
     for(const nav of navigationArray){
         const stepId = nav.targetStepId

@@ -1,12 +1,10 @@
 import {Component, createSignal} from "solid-js"
-import {FormModifier, useForm} from "./formContext"
 import KeyboardArrowLeftIcon from "@suid/icons-material/KeyboardArrowLeft"
 import KeyboardArrowRightIcon from "@suid/icons-material/KeyboardArrowRight"
 import {Button} from "@suid/material"
+import {formState, currentStepId, formErrors, formDisplay, history} from "./melStore"
 
 export const StateViewer: Component = () => {
-    const formModifier = useForm() as FormModifier
-    const {formState, currentStepId, formErrors, formDisplay, history} = formModifier
     const [expanded, setExpanded] = createSignal<boolean>(false)
 
     return <div class="fixed right-0 top-14 bg-gray-900 text-amber-50 h-full overflow-y-auto">
