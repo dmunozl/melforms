@@ -35,7 +35,6 @@ describe("Renderer Tests", () => {
 
         fireEvent.click(button)
         expect(testTrigger).toHaveBeenCalledTimes(1)
-
     })
 
     it("Should properly render TextField", async () => {

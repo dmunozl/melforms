@@ -27,7 +27,7 @@ export type MelBlock = {
     class?: string
     options?: Record<string, string | string[] | boolean>
     triggers?: MelTrigger[]
-    display?: MelOperation
+    display?: MelOperation[]
 }
 
 export type MelNavigation = {
@@ -41,7 +41,7 @@ export type MelTrigger = {
 }
 
 export type MelOperation = {
-    function: "exactMatch" | "contains" | "isValid",
+    function: "exactMatch" | "contains" | "isValid" | "isVisible",
     reference: MelReference
     expectedValue?: MelValue
 }
@@ -60,10 +60,9 @@ export type MelColumn = {
 
 /* SUPPORTED VALUES */
 export type MelSimpleValue = string | boolean
-export type MelArrayValue = MelSimpleValue[]
-export type MelCompValue = MelSimpleValue | MelArrayValue
-export type MelObjectValue = Record<string, MelCompValue>
-export type MelValue = MelCompValue | MelObjectValue
+export type MelObjectValue = Record<string, MelSimpleValue>
+export type MelArrayValue = MelSimpleValue[] | MelObjectValue[]
+export type MelValue = MelSimpleValue | MelObjectValue | MelArrayValue
 
 /* TYPES FOR DATA AND STATE HANDLING */
 export type MelFormState = Record<string, MelStepState>

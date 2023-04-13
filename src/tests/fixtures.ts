@@ -1,8 +1,8 @@
 // noinspection SpellCheckingInspection
 
-import {MelForm} from "../types"
+import {MelForm, MelFormBoolState, MelFormState} from "../types"
 
-export const mockFormState = {
+export const mockFormState:MelFormState = {
     "mockStep": {
         "stringBlock": "blockValue",
         "booleanBlock": true,
@@ -10,11 +10,10 @@ export const mockFormState = {
         "objectBlock": {
             key1: "value1",
             key2: true,
-            key3: ["option1", "option2"]
         }
     }
 }
-export const mockFormDisplay = {
+export const mockFormDisplay:MelFormBoolState = {
     "mockStep": {
         "stringBlock": true,
         "booleanBlock": true,
@@ -22,7 +21,7 @@ export const mockFormDisplay = {
         "objectBlock": false
     }
 }
-export const mockFormErrors = {
+export const mockFormErrors:MelFormBoolState = {
     "mockStep": {
         "stringBlock": true,
         "booleanBlock": false,

@@ -1,9 +1,9 @@
 import { expect, describe, it } from "vitest"
-import {isValid} from "../isValid"
+import {isVisible} from "../isVisible"
 import {setFormDisplay, setFormErrors} from "../../melStore"
 import {mockFormDisplay, mockFormErrors} from "../../tests/fixtures"
 
-describe("isValid operation", () => {
+describe("isVisible operation", () => {
     setFormDisplay(mockFormDisplay)
     setFormErrors(mockFormErrors)
 
@@ -13,9 +13,9 @@ describe("isValid operation", () => {
         const reference3 = {stepId:"mockStep", blockId:"arrayBlock"}
         const reference4 = {stepId:"mockStep", blockId:"objectBlock"}
 
-        expect(isValid(reference1), "Display true and Error true").toBe(false)
-        expect(isValid(reference2), "Display true and Error false").toBe(true)
-        expect(isValid(reference3), "Display false and Error true").toBe(false)
-        expect(isValid(reference4), "Display false and Error false").toBe(true)
+        expect(isVisible(reference1), "Display true and Error true").toBe(true)
+        expect(isVisible(reference2), "Display true and Error false").toBe(true)
+        expect(isVisible(reference3), "Display false and Error true").toBe(false)
+        expect(isVisible(reference4), "Display false and Error false").toBe(false)
     })
 })

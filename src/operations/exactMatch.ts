@@ -1,66 +1,73 @@
-import {MelArrayValue, MelCompValue, MelObjectValue, MelReference, MelValue} from "../types"
+import {MelArrayValue, MelObjectValue, MelReference, MelValue} from "../types"
 import {formState} from "../melStore"
 
 export const exactMatch = (reference:MelReference, expectedValue?:MelValue) => {
-    const simpleTypes = ["string", "boolean"]
     const value = formState()[reference.stepId]?.[reference.blockId]
-    const matchType = typeof value
 
-    if(matchType === "undefined")
+    // If values are not of the same type, they are not comparable
+    if(typeof value !== typeof expectedValue){
+        return false
+    }
+
+    // This means reference is empty, then we return false
+    if(typeof value === "undefined")
         return false
 
-    if (Array.isArray(value) || simpleTypes.includes(matchType)) {
-        return exactMatchCompValues(value as MelCompValue, expectedValue as MelCompValue)
+    // If simple, just return direct comparison
+    if (typeof value === "string" || typeof value === "boolean") {
+        return value === expectedValue
     }
 
-    if (expectedValue && matchType === "object") {
-        const valueKeys = Object.keys(value)
-        const expectedKeys = Object.keys(expectedValue)
-
-        if(valueKeys.length !== expectedKeys.length){
-            return false
-        }
-
-        for(const key of valueKeys){
-            if(!expectedKeys.includes(key)){
-                return false
-            }
-            const v1 = (value as MelObjectValue)[key]
-            const v2 = (expectedValue as MelObjectValue)[key]
-            if(!exactMatchCompValues(v1, v2)){
-                return false
-            }
-        }
-        return true
+    // If Array, call Array matcher function
+    if (Array.isArray(value)) {
+        return exactMatchArrays(value as MelArrayValue, expectedValue as MelArrayValue)
     }
 
-    console.warn(`No match implementation for type ${matchType}. Defaulting to false.`)
+    // If it's an object, it should only contain strings and booleans
+    if (expectedValue && typeof value === "object") {
+        return exactMatchObjects(value, expectedValue as MelObjectValue)
+    }
+
+    console.warn(`No match implementation for type ${typeof value}. Defaulting to false.`)
     return false
 }
 
-const exactMatchCompValues = (value1: MelCompValue, value2: MelCompValue) => {
-    const matchType = typeof value1
-    if(matchType !== typeof value2){
+const exactMatchObjects = (value1: MelObjectValue, value2: MelObjectValue) => {
+    const valueKeys = Object.keys(value1)
+    const expectedKeys = Object.keys(value2)
+
+    if(valueKeys.length !== expectedKeys.length){
         return false
     }
 
-    if (["string", "boolean"].includes(matchType)) {
-        return value1 === value2
-    }
-
-    if (Array.isArray(value1) && Array.isArray(value2)) {
-        if(value1.length !== value2.length){
+    for(const key of valueKeys){
+        if(!expectedKeys.includes(key)){
             return false
         }
-        return exactMatchArrays(value1, value2)
+        const v1 = value1[key]
+        const v2 = value2[key]
+        if(v1 !== v2){
+            return false
+        }
     }
-
-    return false
+    return true
 }
 
 const exactMatchArrays = (array1:MelArrayValue, array2:MelArrayValue) => {
+    if(array1.length !== array2.length) {
+        return false
+    }
+
     for(const idx in array1){
-        if(array1[idx] !== array2[idx]){
+        const value1 = array1[idx]
+        const value2 = array2[idx]
+        if(
+            typeof value1 === "object" &&
+            typeof value2 === "object" &&
+            !exactMatchObjects(value1, value2)
+        ){
+            return false
+        }else if(value1 !== value2) {
             return false
         }
     }

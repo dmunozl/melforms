@@ -14,9 +14,15 @@ export const withCommon = (Component: Component<RendererProps>) => {
                 formDisplay()[stepConfig.id]?.[block.id] !== true && updateDisplay(stepConfig.id, block.id, true)
                 return true
             }
+            let shouldDisplay = true
 
-            const operationFunction = operationDict[display.function]
-            const shouldDisplay = operationFunction(display.reference, display.expectedValue)
+            for (const operation of display){
+                const operationFunction = operationDict[operation.function]
+                if(!operationFunction(operation.reference, operation.expectedValue)){
+                    shouldDisplay = false
+                    break
+                }
+            }
 
             shouldDisplay !== formDisplay()[stepConfig.id]?.[block.id] && updateDisplay(stepConfig.id, block.id, shouldDisplay)
 

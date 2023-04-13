@@ -18,6 +18,18 @@ const testForm: MelForm = {
             navigation: [{
                 type: "just go",
                 targetStepId: "step2"
+            },
+            {
+                type: "operation",
+                targetStepId: "step2",
+                operation: {
+                    function: "exactMatch",
+                    reference: {
+                        stepId: "step1",
+                        blockId: "block1"
+                    },
+                    expectedValue: "option2"
+                }
             }],
             blocks: {
                 "title": {
@@ -57,14 +69,14 @@ const testForm: MelForm = {
                         label: "Text field 1",
                         fullWidth: true
                     },
-                    display: {
+                    display: [{
                         function: "exactMatch",
                         reference: {
                             stepId: "step1",
                             blockId: "block1"
                         },
                         expectedValue: "option1"
-                    }
+                    }]
                 },
                 "textfield2": {
                     id: "textfield2",
@@ -76,13 +88,19 @@ const testForm: MelForm = {
                         label: "Text field 2",
                         fullWidth: true
                     },
-                    display: {
+                    display: [{
                         function: "isValid",
                         reference: {
                             stepId: "step1",
                             blockId: "textfield1"
                         }
-                    }
+                    },{
+                        function: "isVisible",
+                        reference: {
+                            stepId: "step1",
+                            blockId: "textfield1"
+                        },
+                    }]
                 },
                 "block3": {
                     id: "block3",

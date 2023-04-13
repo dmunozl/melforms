@@ -44,33 +44,23 @@ describe("exactMatch operation", () => {
         const correctValue = {
             key1: "value1",
             key2: true,
-            key3: ["option1", "option2"]
         }
         const wrongValue1 = {
             key1: "value2",
             key2: true,
-            key3: ["option1", "option2"]
         }
         const wrongValue2 = {
             key1: "value1",
             key2: false,
-            key3: ["option1", "option2"]
         }
         const wrongValue3 = {
-            key1: "value1",
-            key2: true,
-            key3: ["option1", "option2", "option3"]
-        }
-        const wrongValue4 = {
             key4: "value1",
             key5: true,
-            key6: ["option1", "option2", "option3"]
         }
 
         expect(exactMatch(reference, correctValue), "Same keys, same values").toBe(true)
         expect(exactMatch(reference, wrongValue1), "Same keys, different string value").toBe(false)
         expect(exactMatch(reference, wrongValue2), "Same keys, different bool value").toBe(false)
-        expect(exactMatch(reference, wrongValue3), "Same keys, different array value").toBe(false)
-        expect(exactMatch(reference, wrongValue4), "Different keys, same values").toBe(false)
+        expect(exactMatch(reference, wrongValue3), "Different keys, same values").toBe(false)
     })
 })

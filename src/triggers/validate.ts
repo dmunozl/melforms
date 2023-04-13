@@ -1,17 +1,18 @@
 import {TriggerFunction} from "./types"
-import {currentStepId, formErrors, formDisplay, setShowErrors} from "../melStore"
+import {currentStepId, setShowErrors, form} from "../melStore"
+import {isValid} from "../operations/isValid"
+import {isVisible} from "../operations/isVisible"
 
 export const validate:TriggerFunction = () => {
     let hasErrors = false
+    const blockIds = Object.keys(form()?.steps[currentStepId()].blocks || {})
 
-    const stepErrors = formErrors()[currentStepId()]
-    const stepDisplay = formDisplay()[currentStepId()]
-    for (const blockId in stepErrors) {
-        // If block was hidden, ignore validation
-        if(stepDisplay[blockId] !== undefined && !stepDisplay[blockId]){
-            continue
+    for (const blockId of blockIds) {
+        const reference = {
+            stepId: currentStepId(),
+            blockId: blockId
         }
-        if(stepErrors[blockId]){
+        if(!isValid(reference) && isVisible(reference)){
             hasErrors = true
             break
         }
