@@ -3,56 +3,68 @@
 import {describe, expect, it, vi} from "vitest"
 import {fireEvent, render} from "@solidjs/testing-library"
 
-import {textFieldForm} from "./fixtures"
-import {TriggerFunction} from "../triggers/types"
-import {MelValue} from "../types"
-import {formDisplay, formErrors, formState} from "../melStore"
+import {
+    textForm,
+    buttonForm,
+    textFieldForm,
+    toggleButtonForm
+} from "./fixtures"
+import {TriggerDict} from "../triggers/types"
+import {formErrors, formState} from "../melStore"
 import {MelRenderer} from "../MelRenderer"
 
-type SingleBlockData = {
-    value: MelValue | MelValue[],
-    hasError: boolean,
-    display: boolean
-}
-const getBlockDataFunction = (
-    stepId: string,
-    blockId: string,
-    callback: (data: SingleBlockData) => SingleBlockData
-) => {
-    const returnFunction: TriggerFunction = () => {
-        const blockData: SingleBlockData = {
-            value: formState()[stepId]?.[blockId],
-            hasError: formErrors()[stepId]?.[blockId],
-            display: formDisplay()[stepId]?.[blockId]
-        }
-        callback(blockData)
-        return true
-    }
-
-    return returnFunction
-}
 describe("Renderer Tests", () => {
-    it("Should properly render TextField", async () => {
-        const dataFunction = vi.fn((data) => data)
-        const getDataTrigger = getBlockDataFunction("step", "textfield", dataFunction)
-        const customTriggers = {
-            spyBlock: getDataTrigger
-        }
-        const {getByText, getByTestId} = await render(() =>
-            <MelRenderer form={textFieldForm} customTriggers={customTriggers}/>
+    it("Should properly render Text", async () => {
+        const {getByText} = await render(() =>
+            <MelRenderer form={textForm}/>
         )
-        const button = getByText("Spy Block")
+        const text = getByText("A test text")
+
+        expect(text).toBeDefined()
+    })
+
+    it("Should properly render Button", async () => {
+        const testTrigger = vi.fn()
+        const customTriggers:TriggerDict = {
+            testTrigger: testTrigger
+        }
+        const {getByText} = await render(() =>
+            <MelRenderer form={buttonForm} customTriggers={customTriggers}/>
+        )
+        const button = getByText("Test")
+
+        fireEvent.click(button)
+        expect(testTrigger).toHaveBeenCalledTimes(1)
+
+    })
+
+    it("Should properly render TextField", async () => {
+        const {getByTestId} = await render(() =>
+            <MelRenderer form={textFieldForm}/>
+        )
         const textField = getByTestId("textfield").children[1].children[0]
 
-        fireEvent.click(button)
+        expect(formState()["step"]?.["textfield"]).toEqual(undefined)
+        expect(formErrors()["step"]?.["textfield"]).toEqual(true)
         fireEvent.input(textField, {target: {value: "Test Value"}})
-        fireEvent.click(button)
-        expect(dataFunction).toHaveBeenCalledTimes(2)
+        expect(formState()["step"]?.["textfield"]).toEqual("Test Value")
+        expect(formErrors()["step"]?.["textfield"]).toEqual(false)
+    })
 
-        const results: SingleBlockData[] = dataFunction.mock.results.map((result) => result.value)
-        expect(results[0].value).toEqual(undefined)
-        expect(results[0].hasError).toEqual(true)
-        expect(results[1].value).toEqual("Test Value")
-        expect(results[1].hasError).toEqual(false)
+    it("Should properly render toggle button", async () => {
+        const {getByText} = await render(() =>
+            <MelRenderer form={toggleButtonForm}/>
+        )
+        const option1 = getByText("Option 1")
+        const option2 = getByText("Option 2")
+        const option3 = getByText("Option 3")
+
+        expect(formState()["step"]?.["toggleButton"]).toEqual(undefined)
+        fireEvent.click(option1)
+        expect(formState()["step"]?.["toggleButton"]).toEqual("option1")
+        fireEvent.click(option2)
+        expect(formState()["step"]?.["toggleButton"]).toEqual("option2")
+        fireEvent.click(option3)
+        expect(formState()["step"]?.["toggleButton"]).toEqual("option3")
     })
 })

@@ -14,7 +14,6 @@ export const mockFormState = {
         }
     }
 }
-
 export const mockFormDisplay = {
     "mockStep": {
         "stringBlock": true,
@@ -32,6 +31,58 @@ export const mockFormErrors = {
     }
 }
 
+export const textForm: MelForm = {
+    firstStepId: "step",
+    steps: {
+        "step": {
+            id: "step",
+            blocks: {
+                "text": {
+                    id: "text",
+                    name: "Text",
+                    type: "Text",
+                    options: {
+                        text: "A test text",
+                        variant: "h4"
+                    }
+                },
+            },
+            layout: [{
+                width:"w-full",
+                blockIds: [
+                    "text"
+                ]
+            }]
+        }
+    }
+}
+export const buttonForm: MelForm = {
+    firstStepId: "step",
+    steps: {
+        "step": {
+            id: "step",
+            blocks: {
+                "button": {
+                    id: "button",
+                    name: "Button",
+                    type: "Button",
+                    triggers: [{
+                        function: "testTrigger"
+                    }],
+                    options: {
+                        label: "Test"
+                    }
+                }
+            },
+            layout: [{
+                width:"w-full",
+                blockIds: [
+                    "button"
+                ]
+            }]
+        }
+    }
+}
 export const textFieldForm: MelForm = {
     firstStepId: "step",
     steps: {
@@ -49,23 +100,37 @@ export const textFieldForm: MelForm = {
                         fullWidth: true,
                         "data-testid": "textfield"
                     }
-                },
-                "button": {
-                    id: "button",
-                    name: "Button",
-                    type: "Button",
-                    triggers: [{
-                        function: "spyBlock"
-                    }],
-                    options: {
-                        label: "Spy Block"
-                    }
                 }
             },
             layout: [{
                 width:"w-full",
                 blockIds: [
-                    "textfield", "button"
+                    "textfield"
+                ]
+            }]
+        }
+    }
+}
+export const toggleButtonForm: MelForm = {
+    firstStepId: "step",
+    steps: {
+        "step": {
+            id: "step",
+            blocks: {
+                "toggleButton": {
+                    id: "toggleButton",
+                    name: "Toggle Button",
+                    type: "ToggleButton",
+                    options: {
+                        values: ["option1", "option2", "option3"],
+                        labels: ["Option 1", "Option 2", "Option 3"]
+                    }
+                },
+            },
+            layout: [{
+                width:"w-full",
+                blockIds: [
+                    "toggleButton"
                 ]
             }]
         }
